@@ -1,0 +1,37 @@
+﻿.chart {
+    position: relative;
+    z-index: 0;
+    border: 5px;
+}
+
+.chart-rectangle {
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    z-index: 1;
+    opacity: 1;
+}
+
+.chart-rectangle-tooltip {
+    position:absolute;
+    visibility:hidden;
+    align-content: center;
+    justify-items: center;
+    transition: opacity 0.5s;
+    z-index: 10;
+}
+
+.chart-rectangle:hover {
+    opacity: 0.85;
+}
+
+    .chart-rectangle:hover .chart-rectangle-tooltip {
+        visibility:visible;
+    }
+
+
+.testClass {
+    background-color: red;
+    color: blue;
+    font-weight: bold;
+}

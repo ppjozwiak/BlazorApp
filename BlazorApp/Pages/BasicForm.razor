@@ -1,0 +1,80 @@
+﻿@page "/basicform"
+@using BlazorApp.Data
+
+<h3>BasicForm</h3>
+<br />
+<h3>formStatus: @formStatus</h3>
+<EditForm Model="@testModel"
+          OnInvalidSubmit=@invalidSubmit
+          OnValidSubmit=@validSubmit>
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="jobtitle">Job title</label>
+        <InputText @bind-Value=testModel.jobTitle class="form-control" id="jobtitle" />
+    </div>
+    <div class="form-group">
+        <label for="jobdescription">Job description</label>
+        <InputText @bind-Value=testModel.jobDescription class="form-control" id="jobdescrition" />
+    </div>
+    <div class="form-group">
+        <label for="jobdate">Job date</label>
+        <InputDate @bind-Value=testModel.dateOfPosting class="form-control" id="jobdate" />
+    </div>
+    <div class="form-group">
+        <label for="currentlyemployed">Currently employed</label>
+        <InputCheckbox @bind-Value=testModel.currentlyEmploed id="currentlyemployed" />
+    </div>
+    <div class="form-group">
+        <label for="experience">Years of expereience</label>
+        <InputNumber @bind-Value=testModel.yearOfExperience class="form-control" id="experiece" />
+    </div>
+    <div class="form-group">
+        <ValidationMessage For="@(()=>testModel.levelOfExperience)"/>
+        <label for="senioritylevel">Seniority level</label>
+        <InputSelect @bind-Value=testModel.levelOfExperience class="form-control" id="senioritylevel">
+            <option selected value="">Select</option>
+
+            @foreach (var item in experienceList)
+            {
+                <option value="@item">@item </option>
+            }
+        </InputSelect>
+    </div>
+
+
+
+    <br />
+    <input type="submit" class="btn-primary" value="Save" />
+</EditForm>
+
+
+
+
+@code {
+    BasicFormModel testModel = new();
+    List<string> experienceList = new();
+    string formStatus = "";
+
+    protected override void OnInitialized()
+    {
+        formStatus = "";
+        experienceList.Add("Entry");
+        experienceList.Add("Mid Level");
+        experienceList.Add("Senior");
+    }
+
+    protected void formSubmitted(EditContext editContext)
+    {
+        bool formIsValid = editContext.Validate();
+        formStatus = formIsValid ? "success" : "fail";
+    }
+    protected void validSubmit()
+    {
+        formStatus = "valid";
+    }
+    protected void invalidSubmit()
+    {
+        formStatus = "invalid";
+    }
+}

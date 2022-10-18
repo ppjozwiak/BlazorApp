@@ -1,0 +1,42 @@
+﻿@page "/"
+@using Models
+
+<h2>One-Way Data Binding</h2>
+
+<h2>@name</h2>
+
+<br />
+
+<h2>@example.Id</h2>
+<h2>@example.Name</h2>
+
+<br />
+<br />
+<h2>One-Way Data Binding</h2>
+
+<input type="text" @bind-value="@example.Name" @bind-value:event="oninput"/>
+
+
+<input type="number" @bind-value="@example.Id" @bind-value:event="oninput"/>
+
+@code {
+    string name = "Bob";
+
+    BaseModel example = new()
+        {
+            Id = 1,
+            Name = "Sally"
+        };
+
+
+
+}
+
+
+
+
+
+
+
+
+<Counter IncrementAmount="10" />

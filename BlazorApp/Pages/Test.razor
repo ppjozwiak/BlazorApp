@@ -1,0 +1,77 @@
+﻿@page "/test"
+@using Microsoft.AspNetCore.Http.Extensions
+<h3>Test</h3>
+
+<div class="form-control">
+    ID : <input type="number" @bind-value="id" @bind-value:event="oninput" />
+
+    <a href="/routeexample/@id">
+        submit ID
+    </a>
+
+    <button type="submit" @onclick="@(x=>RouteWithId(id))">
+        submit ID as code
+    </button>
+
+</div>
+<div class="form-control">
+    Bool : <input type="checkbox" @bind-value="myOptionalBool" @bind-value:event="oninput" />
+
+    <a href="/routeexample/@myOptionalBool">
+        submit Bool
+    </a>
+
+    <button type="submit" @onclick="@(x=> RouteWithBool(id,myOptionalBool))">
+        Submit Bool as code
+    </button>
+
+</div>
+<div class="form-control">
+    String : <input type="text" @bind-value="myOptionalValue" @bind-value:event="oninput" />
+
+    <a href="/routeexample/@id/@myOptionalValue">
+        submit String
+    </a>
+
+    <button type="submit" @onclick="@(x=> RouteWithString(id,myOptionalValue))">
+        Submit string as code
+    </button>
+
+</div>
+
+
+
+@code
+{
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
+    public int id { get; set; }
+
+    public bool myOptionalBool { get; set; }
+
+    public string myOptionalValue { get; set; }
+
+    public void RouteWithId(int id)
+    {
+        NavigationManager.NavigateTo($"/routeexample/{id}");
+    }
+
+    public void RouteWithBool(int id, bool optionalBool)
+    {
+
+        if (id > 0)
+        {
+            NavigationManager.NavigateTo($"/routeexample/{id}/{optionalBool}");
+        }
+        else
+        {
+            NavigationManager.NavigateTo($"/routeexample/{optionalBool}");
+        }
+    }
+
+    public void RouteWithString(int id, string myOptionalValue)
+    {
+        NavigationManager.NavigateTo($"/routeexample/{id}/{myOptionalValue}");
+    }
+}

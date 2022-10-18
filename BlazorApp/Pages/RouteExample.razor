@@ -1,0 +1,30 @@
+﻿@page "/routeexample"
+@page "/routeexample/{myOptionalBool:bool}"
+@page "/routeexample/{id:int}/{myOptionalBool:bool?}"
+@page "/routeexample/{id:int}/{myOptionalValue?}"
+
+<h3>RouteExample</h3>
+
+<p>
+    id: @id
+</p>
+<p>
+    myOptionalBool: @myOptionalBool
+</p>
+<p>
+    myOptionalValue: @myOptionalValue
+</p>
+
+
+@code
+{
+    [Parameter]
+    public int? id { get; set; }
+
+    [Parameter]
+    public bool? myOptionalBool { get; set; }
+
+    [Parameter]
+    public string myOptionalValue { get; set; }
+
+}

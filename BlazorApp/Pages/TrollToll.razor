@@ -1,0 +1,69 @@
+﻿@page "/trolltollpage"
+@using BlazorApp.Pages.TrollTollCmponents
+
+<h3>TrollToll</h3>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <p> Troll toll ptice: @trollTollPrice</p>
+            <ButtonAndImage title="Troll Toll" buttonLabel="Pay the toll" imageName="troll" OnGenericClick="DidYouPaeTheTrollToll"></ButtonAndImage>
+            <p>@message</p>
+        </div>
+        <div class="col-md-6">
+            <p> Gold Mined: @goldMined</p>
+            <ButtonAndImage title="Earn gold" buttonLabel="Mine for gold" imageName="gold" OnGenericClick="IncrementGold"></ButtonAndImage>
+        </div>
+    </div>
+    @if (trollTollPaid)
+    {
+    <div class="align-content-center">
+        <img width="300" height="250" src="Media/sauron.jpg"/>
+    </div>
+    }
+
+
+</div>
+
+
+
+
+
+@code {
+    public int trollTollPrice;
+    public int goldMined;
+    public bool trollTollPaid;
+    public string message;
+
+
+    protected override void OnInitialized()
+    {
+        Random random = new();
+
+        trollTollPrice = random.Next(10, 20);
+        trollTollPaid = false;
+        goldMined = 0;
+        message = "";
+    }
+
+
+    protected void IncrementGold()
+    {
+        goldMined++;
+    }
+
+    protected void DidYouPaeTheTrollToll()
+    {
+        if (goldMined<trollTollPrice)
+        {
+            trollTollPaid = false;
+            message = "You need to play";
+        }
+        else
+        {
+            trollTollPaid = true;
+            message = "Thanks";
+            goldMined -= trollTollPrice;
+        }
+    }
+}
