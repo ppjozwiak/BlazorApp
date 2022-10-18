@@ -25,20 +25,18 @@
 
         @foreach (var item in Products)
         {
-            <g>
-                <rect class="chart-rectangle" width="20" height="@(item.Quantity*5)"
-                  fill="rgb(@GetRandomColor(),@GetRandomColor(),@GetRandomColor())"
-                  stroke-width="2" y="@(550-(item.Quantity*5))" x="@(xStart+=40)">
-                </rect>
-            </g>
-            <g>
+            <rect class="chart-rectangle" width="20" height="@(item.Quantity*5)"
+              fill="rgb(@GetRandomColor(),@GetRandomColor(),@GetRandomColor())"
+              stroke-width="2" y="@(550-(item.Quantity*5))" x="@(xStart+=40)">
+            </rect>
+            <text>
                 <text class="chart-rectangle-tooltip" y="@(520-(item.Quantity*5))" x="@(xStart-10)">
                     N: @item.Name
                 </text>
                 <text y="@(540-(item.Quantity*5))" x="@(xStart-10)">
                     V: @item.Quantity
                 </text>
-            </g>
+            </text>
             <g>
                 <text x="@(xLabelStart+=40)" y="580px" rotate="0"> @item.Name </text>
             </g>
@@ -54,7 +52,8 @@
         <rect x="100" y="140" fill="red" width="10" height="10" transform="translate(0,10) rotate(10)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" />
         <g><text x="100" y="100">rotate</text></g>
-        <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(5)" />
+        <rect x="250" y="0" fill="rgb(@colorRed,@colorGreen,@colorBlue)"
+              width="15" height="15" transform="rotate(5)" @onclick="ChangeColor" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(10)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(15)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(20)" />
@@ -126,6 +125,21 @@
         new ProductionQuantity("11", 100)
     };
 
+    [Parameter]
+    public int colorRed { get; set; } = 0;
+    [Parameter]
+    public int colorGreen { get; set; } = 0;
+    [Parameter]
+    public int colorBlue { get; set; } = 0;
+
+    private void ChangeColor()
+    {
+        Random rnd = new();
+        colorRed = rnd.Next(0, 255);
+        colorGreen = rnd.Next(0, 255);
+        colorBlue = rnd.Next(0, 255);
+
+    }
 
     public int GetRandomColor()
     {

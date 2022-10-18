@@ -14,19 +14,19 @@
 
 .chart-rectangle-tooltip {
     position:absolute;
-    visibility:hidden;
     align-content: center;
     justify-items: center;
+    opacity:100%;
     transition: opacity 0.5s;
     z-index: 10;
 }
 
 .chart-rectangle:hover {
-    opacity: 0.85;
+    opacity: 90%;
 }
 
     .chart-rectangle:hover .chart-rectangle-tooltip {
-        visibility:visible;
+        color:blue;
     }
 
 
