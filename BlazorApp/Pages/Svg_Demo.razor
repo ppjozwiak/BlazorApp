@@ -1,10 +1,14 @@
 ﻿@page "/svgdemo"
 @using Models
+
 <head>
     <link rel="stylesheet" href="~/css/SVG_Demo.css" />
 </head>
 
 <h3>Svg_Demo</h3>
+<button onclick="@ChangeColor">
+    test
+</button>
 
 <div>
     <svg height="600" width="800" style="border:1px solid black; background-color:transparent ;">
@@ -42,18 +46,17 @@
             </g>
         }
     </svg>
-    <br />
-
-    <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" style="background-color:lemonchiffon; border:5px solid gray;">
-
+</div>
+<br />
+<div class="svg-resize-container">
+    <svg class="svg-resize" xmlns="http://www.w3.org/2000/svg" style="background-color:rgb(@colorRed,@colorGreen,@colorBlue); border:5px solid gray;">
         <rect x="0" y="0" fill="blue" width="10" height="10" transform="rotate(45)" />
         <rect x="100" y="140" fill="green" width="10" height="10" />
         <rect x="100" y="140" fill="black" width="10" height="10" transform="rotate(2)" />
         <rect x="100" y="140" fill="red" width="10" height="10" transform="translate(0,10) rotate(10)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" />
         <g><text x="100" y="100">rotate</text></g>
-        <rect x="250" y="0" fill="rgb(@colorRed,@colorGreen,@colorBlue)"
-              width="15" height="15" transform="rotate(5)" @onclick="ChangeColor" />
+        <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(5)" @onclick="ChangeColor" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(10)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(15)" />
         <rect x="250" y="0" fill="blue" width="10" height="10" transform="rotate(20)" />
@@ -98,14 +101,13 @@
 
     </svg>
 </div>
-
 <br />
 <br />
 <br />
-<div class="chart-rectangle">
+@*<div class="chart-rectangle">
     <p>testTooltip</p>
     <p class="chart-rectangle-tooltip">tooltip</p>
-</div>
+</div>*@
 
 @code {
     int xLabelStart = 30, xStart = 30, yLine = 50;
@@ -126,11 +128,11 @@
     };
 
     [Parameter]
-    public int colorRed { get; set; } = 0;
+    public int colorRed { get; set; } = 255;
     [Parameter]
-    public int colorGreen { get; set; } = 0;
+    public int colorGreen { get; set; } = 255;
     [Parameter]
-    public int colorBlue { get; set; } = 0;
+    public int colorBlue { get; set; } = 255;
 
     private void ChangeColor()
     {

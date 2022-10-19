@@ -2,21 +2,22 @@
     position: relative;
     z-index: 0;
     border: 5px;
+    z-index:10;
 }
 
 .chart-rectangle {
     position: relative;
     cursor: pointer;
     width: 20px;
-    z-index: 1;
+    z-index: 10;
     opacity: 1;
 }
 
 .chart-rectangle-tooltip {
-    position:absolute;
+    position: absolute;
     align-content: center;
     justify-items: center;
-    opacity:100%;
+    opacity: 100%;
     transition: opacity 0.5s;
     z-index: 10;
 }
@@ -26,7 +27,7 @@
 }
 
     .chart-rectangle:hover .chart-rectangle-tooltip {
-        color:blue;
+        color: blue;
     }
 
 
@@ -34,4 +35,33 @@
     background-color: red;
     color: blue;
     font-weight: bold;
+}
+
+.svg-resize {
+    flex: auto;
+    position: relative;
+}
+
+.svg-resize-container {
+    position:absolute;
+    top:750px;
+    bottom:10px;
+    left:280px;
+    right:10px;
+    display: flex;
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 1200px;
+    max-height: 1200px;
+    z-index:0;
+}
+
+@media(max-width:1050px){
+    .svg-resize-container {
+        position: absolute;
+        top: 750px;
+        bottom: 10px;
+        left: 180px;
+        right: 10px;
+    }
 }
